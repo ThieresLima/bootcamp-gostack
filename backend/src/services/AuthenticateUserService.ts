@@ -5,6 +5,8 @@ import { sign } from 'jsonwebtoken';
 
 import User from '../models/User';
 
+import authConfig from '../config/auth';
+
 interface Request {
   email: string;
   password: string;
@@ -31,9 +33,11 @@ class AuthenticateUserService {
       throw new Error('Incorrect email/password combination.');
     }
 
-    const token = sign({}, '7e75947bb63bfb7dae284cea30180aec', {
+    const { secret, expiresIn } = authConfig.JWT;
+
+    const token = sign({}, secret, {
       subject: user.id,
-      expiresIn: '1d',
+      expiresIn,
     })
 
     return { user, token };
