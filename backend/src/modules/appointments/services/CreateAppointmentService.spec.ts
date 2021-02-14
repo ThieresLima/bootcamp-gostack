@@ -3,7 +3,7 @@ import AppError from '@shared/errors/AppErro';
 import FakeAppointmentsRepository from '../repositories/fakes/FakeAppointmentsRepository';
 import CreateAppointmentService from './CreateAppointmentService';
 
-describe('CreateAppointmentService', () => {
+describe('CreateAppointment', () => {
   it('should be able to create a new appointment', async () => {
     const fakeAppointmentsRepository = new FakeAppointmentsRepository();
     const createAppointmentService = new CreateAppointmentService(
@@ -19,7 +19,7 @@ describe('CreateAppointmentService', () => {
     expect(appointment.provider_id).toBe('123123');
   })
 
-  it('should not be able to create a new appointment', async () => {
+  it('should not be able to create a new appointment with same date', async () => {
     const fakeAppointmentsRepository = new FakeAppointmentsRepository();
     const createAppointmentService = new CreateAppointmentService(
       fakeAppointmentsRepository
